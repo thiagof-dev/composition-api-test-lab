@@ -1,17 +1,38 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <br><br>
+  <Dashboard :text="name"/>
+  <br><br>
+  <input type="text" v-model="name">
+  <br><br>
+  <button ref='button' @click="changeName">Click</button>
+  <br><br>
+  <EventButton @buttonClicked="eventAction"/>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup >
+import {ref, onMounted, onUpdated} from 'vue'
+import Dashboard from './components/DashBoard'
+import EventButton from './components/EventsButton'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+let name = ref(null)
+
+const changeName = () => {
+  console.log(name.value)
 }
+
+const eventAction = () => {
+  console.log('eventAction')
+}
+
+onMounted(() => {
+  console.log('Mounted')
+})
+
+onUpdated(()=>{
+  console.log('Updated')
+})
+
 </script>
 
 <style>
